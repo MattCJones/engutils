@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 """
 Quick test that shows code working
+
+Author: Matthew C. Jones
+Email: matt.c.jones.aoe@gmail.com
+
+:copyright: 2020 Matthew C. Jones
+:license: MIT License, see LICENSE for more details.
 """
 
 from engutils import *

@@ -1,5 +1,12 @@
 #!/usr/bin/env python
-"""Importable utilties for engineering problem solving. """
+"""Importable utilties for engineering problem solving.
+
+Author: Matthew C. Jones
+Email: matt.c.jones.aoe@gmail.com
+
+:copyright: 2020 Matthew C. Jones
+:license: MIT License, see LICENSE for more details.
+"""
 
 from inspect import currentframe
 
