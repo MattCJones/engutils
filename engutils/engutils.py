@@ -39,7 +39,7 @@ def name_of_var(var):
 def printv(var, to=None, var_name="", *args, **kwargs):
     """Print name and value of a Pint unit-specified variable.
     For example,
-        
+
         distance = 99.9 * unit('m')
         printv(distance)
         # prints "distance = 99.9 m"

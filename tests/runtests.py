@@ -17,7 +17,8 @@ from engutils import *
 
 N_precision = 5
 h_geom_truth_arr = [0,  5000, 10000, 15000, 20000, 25000, 30000, 35000,
-        40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000] * unit('m')
+        40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000,
+        80000] * unit('m')
 h_geop_truth_arr = [0.0, 4996.07027357, 9984.29343877, 14964.68796877,
         19937.27227877, 24902.06472628, 29859.08361133, 34808.34717666,
         39749.87360801, 44683.68103426, 49609.78752775, 54528.2111044,
@@ -47,15 +48,19 @@ nu_inf_truth_arr = [1.46071857e-05, 2.21100607e-05, 3.52509330e-05,
         2.91173140e-02, 5.11412252e-02, 9.26179078e-02, 1.73576137e-01,
         3.44655513e-01, 7.15580116e-01] * unit('m^2/s')
 
+
 def ut_print(*args, **kwargs):
     """Print that takes into account verbosity level of test suite. """
     if ('-v' in sys.argv) or ('--verbose' in sys.argv):
         print(*args, **kwargs)
 
+
 @unittest.skipIf(False, "Skipping for debug")
 class TestStandardAtm(unittest.TestCase):
     """Run through Test Sets and verify output. """
+
     def setUp(self):
+        """Set up fields and testing function. """
         ut_print("\nComputing standard atmosphere fields")
         h_geop_arr, T_inf_arr, p_inf_arr, rho_inf_arr, a_inf_arr, nu_inf_arr \
                 = standard_atm(h_geom_truth_arr)
@@ -66,53 +71,36 @@ class TestStandardAtm(unittest.TestCase):
         self.a_inf_arr = a_inf_arr
         self.nu_inf_arr = nu_inf_arr
 
-    @unittest.skipIf(False, f"Skipping h_geop")
+        def test_field(field_arr, field_truth_arr, field_name, unit_str):
+            """Test that output field matches truth data. """
+            ut_print("\nTesting {field_name}")
+            for h_geom_truth, field, field_truth in zip(
+                    h_geom_truth_arr.to('km').magnitude,
+                    field_arr.to(unit_str).magnitude,
+                    field_truth_arr.to(unit_str).magnitude):
+                self.assertAlmostEqual(field, field_truth, places=N_precision,
+                        msg=f"Failed at h={h_geom_truth:.1g} km")
+
+        self.test_field = test_field
+
     def test_h_geop(self):
-        """Test h_geop """
-        ut_print("\nTesting h_geop")
-        unit_str = 'km'
-        for h_geom_truth, h_geop, h_geop_truth in zip(h_geom_truth_arr.to('km').magnitude, self.h_geop_arr.to(unit_str).magnitude, h_geop_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(h_geop, h_geop_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.h_geop_arr, h_geop_truth_arr, 'h_geop', 'km')
 
-    @unittest.skipIf(False, f"Skipping T_inf")
     def test_T_inf(self):
-        """Test T_inf """
-        ut_print("\nTesting T_inf")
-        unit_str = 'degC'
-        for h_geom_truth, T_inf, T_inf_truth in zip(h_geom_truth_arr.to('km').magnitude, self.T_inf_arr.to(unit_str).magnitude, T_inf_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(T_inf, T_inf_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.T_inf_arr, T_inf_truth_arr, 'T_inf', 'degC')
 
-    @unittest.skipIf(False, f"Skipping p_inf")
     def test_p_inf(self):
-        """Test p_inf """
-        ut_print("\nTesting p_inf")
-        unit_str = 'kPa'
-        for h_geom_truth, p_inf, p_inf_truth in zip(h_geom_truth_arr.to('km').magnitude, self.p_inf_arr.to(unit_str).magnitude, p_inf_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(p_inf, p_inf_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.p_inf_arr, p_inf_truth_arr, 'p_inf', 'kPa')
 
-    @unittest.skipIf(False, f"Skipping rho_inf")
     def test_rho_inf(self):
-        """Test rho_inf """
-        ut_print("\nTesting rho_inf")
-        unit_str = 'kg/m^3'
-        for h_geom_truth, rho_inf, rho_inf_truth in zip(h_geom_truth_arr.to('km').magnitude, self.rho_inf_arr.to(unit_str).magnitude, rho_inf_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(rho_inf, rho_inf_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.rho_inf_arr, rho_inf_truth_arr, 'rho_inf',
+                unit_str='kg/m^3')
 
-    @unittest.skipIf(False, f"Skipping a_inf")
     def test_a_inf(self):
-        """Test a_inf """
-        ut_print("\nTesting a_inf")
-        unit_str = 'm/s'
-        for h_geom_truth, a_inf, a_inf_truth in zip(h_geom_truth_arr.to('km').magnitude, self.a_inf_arr.to(unit_str).magnitude, a_inf_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(a_inf, a_inf_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.a_inf_arr, a_inf_truth_arr, 'a_inf', 'm/s')
 
-    @unittest.skipIf(False, f"Skipping nu_inf")
     def test_nu_inf(self):
-        """Test nu_inf """
-        ut_print("\nTesting nu_inf")
-        unit_str = 'm^2/s'
-        for h_geom_truth, nu_inf, nu_inf_truth in zip(h_geom_truth_arr.to('km').magnitude, self.nu_inf_arr.to(unit_str).magnitude, nu_inf_truth_arr.to(unit_str).magnitude):
-            self.assertAlmostEqual(nu_inf, nu_inf_truth, places=N_precision, msg=f"Failed at h={h_geom_truth:.1g} km")
+        self.test_field(self.nu_inf_arr, nu_inf_truth_arr, 'nu_inf', 'm^2/s')
 
 
 if __name__ == '__main__':

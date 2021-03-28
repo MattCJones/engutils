@@ -1,8 +1,8 @@
 # Engineering Utilities
 
 ## About
-Module that contains my commonly used utilities for solving arbitrary
-engineering problems.
+Module that contains commonly used utilities for solving arbitrary engineering
+problems.
 
 ## Author
 Matthew C. Jones <matt.c.jones.aoe@gmail.com>
