@@ -22,6 +22,6 @@ In an ipython notebook or a Python script, import my utilities with:
 Engutils is licensed under the MIT LICENSE. See the LICENSE document.
 
 ## Dependencies
-* [scikit-aero](https://github.com/AeroPython/scikit-aero)
+* [ambiance](https://github.com/airinnova/ambiance/)
 * [pint](https://pint.readthedocs.io)
 * [numpy](https://numpy.org)

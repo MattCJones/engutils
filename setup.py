@@ -37,5 +37,5 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.9",
             ],
         keywords="utility engineering design problem solving",
-        install_requires=('pint', 'numpy', 'skaero>=0.2.dev0'),
+        install_requires=('pint', 'numpy', 'ambiance'),
     )
