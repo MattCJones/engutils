@@ -68,11 +68,20 @@ def standard_atm(h):
     h_meters = h.to('m').magnitude
 
     atm = Atmosphere(h_meters)  # output units in SI
-    h_geop = atm.H * unit('m')
-    T_inf = atm.temperature * unit('K')
-    p_inf = atm.pressure * unit('Pa')
-    rho_inf = atm.density * unit('kg/m^3')
-    a_inf = atm.speed_of_sound * unit('m/s')
-    nu_inf = atm.kinematic_viscosity * unit('m^2/s')
+    arr_len = len(atm.H)
+    if arr_len == 1:
+        h_geop = atm.H[0] * unit('m')
+        T_inf = atm.temperature[0] * unit('K')
+        p_inf = atm.pressure[0] * unit('Pa')
+        rho_inf = atm.density[0] * unit('kg/m^3')
+        a_inf = atm.speed_of_sound[0] * unit('m/s')
+        nu_inf = atm.kinematic_viscosity[0] * unit('m^2/s')
+    else:
+        h_geop = atm.H * unit('m')
+        T_inf = atm.temperature * unit('K')
+        p_inf = atm.pressure * unit('Pa')
+        rho_inf = atm.density * unit('kg/m^3')
+        a_inf = atm.speed_of_sound * unit('m/s')
+        nu_inf = atm.kinematic_viscosity * unit('m^2/s')
 
     return h_geop, T_inf, p_inf, rho_inf, a_inf, nu_inf
