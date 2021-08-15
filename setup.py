@@ -10,7 +10,7 @@ from setuptools import setup
 from engutils import __version__, __author__
 
 if __name__ == "__main__":
-    with open('README.md', 'r') as file:
+    with open('README.rst', 'r') as file:
         long_description_ = file.read()
 
     setup(
