@@ -7,6 +7,9 @@ About
 Module that contains commonly used utilities for solving arbitrary engineering
 problems.
 
+Note: as of 2022 January, it may be more helpful to use the :code:`aeroutils`
+package `here <https://github.com/MattCJones/aeroutils>`_.
+
 Author
 ------
 
@@ -37,6 +40,5 @@ Engutils is licensed under the MIT LICENSE. See the LICENSE document.
 Dependencies
 ------------
 
-* `ambiance <https://github.com/airinnova/ambiance>`_: package for Standard Atmosphere calculations.
-* `pint <https://pint.readthedocs.io>`_: package for dealing with units.
 * `numpy <https://numpy.org>`_: package for broad scientific computing.
+* `pint <https://pint.readthedocs.io>`_: package for dealing with units.

@@ -12,4 +12,4 @@ Email: matt.c.jones.aoe@gmail.com
 from .engutils import *
 
 __author__ = "Matthew C. Jones"
-__version__ = "21.08"
+__version__ = "22.01"
